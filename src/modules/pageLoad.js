@@ -1,11 +1,9 @@
-import pageHeading from './pageHeading';
-import pageProjects from './pageProjects';
-import pageTasks from './pageTasks';
+import {renderHeading,renderProjects,renderTasks} from './DomUtil'
 
 const initialLoad = ()=>{
-    pageHeading();
-    pageProjects();
-    pageTasks();
+    renderHeading();
+    renderProjects();
+    renderTasks();
 }
 
 export default initialLoad

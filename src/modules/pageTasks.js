@@ -1,29 +1,20 @@
 
-const tasks = ()=>{
-    
-    const tasks = [{
-        title:'test',
-        discription:'akjec',
-        dueDate:234,
-        priority:1
-        },
-        {
-            title:'test',
-            discription:'akjec',
-            dueDate:234,
-            priority:1
-        },
-        {
-            title:'test',
-            discription:'akjec',
-            dueDate:234,
-            priority:1
-        }
-    ];
+import {projects} from "./pageProjects";
 
-    tasks.forEach((task)=>{
-        console.log(task);
-    })
-}
 
-export default tasks
+const currentProjectTasks = [];
+
+projects.forEach((project)=>{
+    const tasks = []
+    tasks.push(...project.tasks)
+    if (project.isActive){
+        currentProjectTasks.push(...tasks);
+    }
+    // allProjectTasks.push(tasks);
+})
+
+
+// console.log(allProjectTasks);
+console.log("tasks loaded");
+
+export {currentProjectTasks};
