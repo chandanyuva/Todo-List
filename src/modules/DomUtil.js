@@ -1,35 +1,128 @@
 
 import heading from './pageHeading'
-import {projects} from './pageProjects'
-import {currentProjectTasks} from './pageTasks'
+import {projects,showProjectCreationForm} from './pageProjects'
+import {getTasks,addTasks} from './pageTasks'
+
+function renderLayout(){
+    const content = document.querySelector("#content");
+
+    const headingDiv = document.createElement('div');
+    headingDiv.classList.add('headingDiv');
+    
+    const projectsDiv = document.createElement('div');
+    projectsDiv.classList.add('projectsDiv');
+
+    const tasksDiv = document.createElement('div');
+    tasksDiv.classList.add('tasksDiv');
+
+    const footerDiv = document.createElement('div');
+    footerDiv.classList.add('footerDiv');
+
+    //appending
+    content.appendChild(headingDiv);
+    content.appendChild(projectsDiv);
+    content.appendChild(tasksDiv);
+    content.appendChild(footerDiv);
+}
 
 function renderHeading(){
     heading()
 }
 
+
+
 function renderProjects(){
-    const content = document.querySelector("#content");
+    
+    
+    const projectsDiv = document.querySelector(".projectsDiv");
+
+    while (projectsDiv.firstChild){
+        projectsDiv.removeChild(projectsDiv.firstChild);
+    }
+
+    const addProjectBtn = document.createElement('button');
+    addProjectBtn.classList.add('addProject');
+    addProjectBtn.innerText = '+ add project';
+    addProjectBtn.addEventListener('click',()=>{
+        showProjectCreationForm();
+    }) 
+
+    projectsDiv.appendChild(addProjectBtn);
+
     const pList = document.createElement('ul');
+    pList.classList.add('projectList');
+
     // console.log(projects);
     projects.forEach((project)=>{
         const pItem = document.createElement('li');
+        // pList.firstChild.classList.toggle('selected');
+        pItem.addEventListener('click',(event)=>{
+            // console.log(event);
+            projects.forEach((project)=>{
+                project.isActive=false;
+            })
+            project.isActive = true;
+            const selected = document.querySelector('.selected');
+            selected.classList.toggle('selected');
+            pItem.classList.toggle('selected');
+            renderTasks();
+            
+        })
         pItem.innerText = `${project.name}`;
         pList.append(pItem);
     })
-    content.appendChild(pList);
-    console.log('projects loaded');
+    pList.firstChild.classList.toggle('selected');
+    renderTasks();
+
+    projectsDiv.appendChild(pList);
+
 }
 
 function renderTasks(){
-    console.log(currentProjectTasks);
-    const content = document.querySelector('#content');
+    // console.log(currentProjectTasks);
+    
+    const tasksDiv = document.querySelector('.tasksDiv');
+    while (tasksDiv.firstChild){
+        tasksDiv.removeChild(tasksDiv.firstChild);
+    }
+
+    //add tasks btn
+    const addTaskBtn = document.createElement('button');
+    addTaskBtn.classList.add('addTask');
+    addTaskBtn.innerText = '+ add task'
+    addTaskBtn.addEventListener('click',(event)=>{
+        console.log(event);
+        addTasks();
+    })
+
+    tasksDiv.appendChild(addTaskBtn)
+    //add tasks btn
+
+    //display tasks
+
     const tList = document.createElement('ul');
+    tList.classList.add('tasksList');
+
+    const currentProjectTasks = getTasks();
+    // console.log(currentProjectTasks);
     currentProjectTasks.forEach((task)=>{
         const tItem = document.createElement('li');
         tItem.innerText = `${task.title}`;
         tList.append(tItem);
     })
-    content.appendChild(tList);
+
+    //display end
+
+    tasksDiv.appendChild(tList);
 }
 
-export {renderHeading,renderProjects,renderTasks};
+function renderFooter(){
+    const footer = document.createElement('footer');
+    footer.classList.add('footer');
+    footer.innerHTML = '<p>Copyright © 2023 Github:<a href="https://github.com/chandanyuva" target="_blank">chandanyuva</a></p>';
+    
+    const footerDiv = document.querySelector('.footerDiv');
+    footerDiv.appendChild(footer);
+}
+
+export {renderLayout,renderHeading,renderProjects,renderTasks,renderFooter};

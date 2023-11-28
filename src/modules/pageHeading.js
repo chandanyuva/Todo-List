@@ -1,9 +1,11 @@
 const heading = ()=>{
-    const content = document.querySelector("#content");
     
     const heading = document.createElement('h1');
+    heading.classList.add('heading');
     heading.innerText = 'Things i need to do!!!';
-    content.appendChild(heading);
+
+    const headingDiv = document.querySelector(".headingDiv");
+    headingDiv.appendChild(heading);
     console.log("heading loaded");
 }
 
