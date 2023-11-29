@@ -4,7 +4,7 @@ const heading = ()=>{
     heading.classList.add('heading');
     heading.innerText = 'Things i need to do!!!';
 
-    const headingDiv = document.querySelector(".headingDiv");
+    const headingDiv = document.querySelector(".headingDiv");   
     headingDiv.appendChild(heading);
     console.log("heading loaded");
 }

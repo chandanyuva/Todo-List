@@ -91,7 +91,7 @@ function renderTasks(){
     addTaskBtn.classList.add('addTask');
     addTaskBtn.innerText = '+ add task'
     addTaskBtn.addEventListener('click',(event)=>{
-        console.log(event);
+        // console.log(event);
         addTasks();
     })
 
@@ -103,11 +103,79 @@ function renderTasks(){
     const tList = document.createElement('ul');
     tList.classList.add('tasksList');
 
+    const tItem = document.createElement('li');
+    tItem.classList.add('tasksListHeader');
+
+    const tItemDiv = document.createElement('div');
+    tItemDiv.classList.add('tasksItemDiv')
+
+    const tCompleted = document.createElement('p');
+    const tTitle = document.createElement('p');
+    const tDiscrip = document.createElement('p');
+    const tDueDate = document.createElement('p');
+    const tPriority = document.createElement('p');
+
+    tCompleted.innerText = 'Completed';
+    tTitle.innerText = `Title`;
+    tDiscrip.innerText = `Discription`;
+    tDueDate.innerText = `Due-Date`;
+    tPriority.innerText = `Priority`;
+    
+    tItemDiv.appendChild(tCompleted);
+    tItemDiv.appendChild(tTitle);
+    tItemDiv.appendChild(tDiscrip);
+    tItemDiv.appendChild(tDueDate);
+    tItemDiv.appendChild(tPriority);
+
+    tItem.appendChild(tItemDiv)
+
+    tList.append(tItem);
+
+
+
     const currentProjectTasks = getTasks();
+    // console.log(currentProjectTasks);
     // console.log(currentProjectTasks);
     currentProjectTasks.forEach((task)=>{
         const tItem = document.createElement('li');
-        tItem.innerText = `${task.title}`;
+
+        const tItemDiv = document.createElement('div');
+        tItemDiv.classList.add('tasksItemDiv');
+
+        const tCompleted = document.createElement("INPUT");
+        tCompleted.classList.add('check')
+        tCompleted.setAttribute("type", "checkbox");
+        const tTitle = document.createElement('p');
+        const tDiscrip = document.createElement('p');
+        const tDueDate = document.createElement('p');
+        const tPriority = document.createElement('p');
+
+        if(task.completed){
+            tCompleted.setAttribute('checked','')
+        }
+        tCompleted.addEventListener('change',(event)=>{
+            if(event.target.checked){
+                task.completed = true;
+            }else{
+                task.completed = false;
+            }
+            // console.log(task);
+            renderTasks();
+        })
+        
+        tTitle.innerText = `${task.title}`;
+        tDiscrip.innerText = `${task.discription}`;
+        tDueDate.innerText = `${task.dueDate}`;
+        tPriority.innerText = `${task.priority}`;
+        
+        tItemDiv.appendChild(tCompleted);
+        tItemDiv.appendChild(tTitle);
+        tItemDiv.appendChild(tDiscrip);
+        tItemDiv.appendChild(tDueDate);
+        tItemDiv.appendChild(tPriority);
+
+        tItem.appendChild(tItemDiv)
+
         tList.append(tItem);
     })
 

@@ -11,9 +11,17 @@
     gap: 12px 12px;
     grid-auto-flow: row;
     padding: 4px;
+    background-image: url(./background2.jpg);
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .headingDiv{
+    color: whitesmoke;
+    background: rgba(0, 0, 0, 0.211);
+    backdrop-filter: blur(5px);
     grid-column: 1/span 2;
     border: 1px solid black;
     border-radius: 8px;
@@ -22,11 +30,14 @@
 }
 
 .projectsDiv{
+    background: rgba(67, 67, 67, 0.432);
+    backdrop-filter: blur(5px);
     border: 1px solid black;
     border-radius: 8px;
     padding: 8px;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
 }
 
 .projectList{
@@ -41,22 +52,91 @@
     text-align: center;
     padding: 4px;
     margin: 4px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.31);
+    backdrop-filter: blur(50px);
+    color: whitesmoke;
+}
+.addProject{
+    align-self: center;
+    border: none;
+    background-color: rgb(64, 254, 64);
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+}
+.addProject:hover{
+    background-color: rgb(112, 255, 112);
+    background: transparent;
+    backdrop-filter: blur(50px);
 }
 
 .selected{
-    border: 1px solid black;
+    border: 2px solid rgb(255, 255, 255);
     border-radius: 8px;
     padding: 4px;
 }
 
 .tasksDiv{
+    background: rgba(67, 67, 67, 0.432);
+    backdrop-filter: blur(10px);
     border: 1px solid black;
     border-radius: 8px;
     padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
-.tasksList{
+.tasksList > li.tasksListHeader{
+    background: rgba(112, 255, 112, 0.441);
+    backdrop-filter: blur(50px);
+    color: whitesmoke;
+}
+
+.tasksItemDiv{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.tasksItemDiv > p{
+    justify-self: center;
+}
+
+
+.tasksList > li{
     list-style-type: none;
+    padding: 8px;
+    margin: 4px;
+    border-radius: 8px;
+    background: rgba(168, 168, 168, 0.31);
+    backdrop-filter: blur(50px);
+    color: whitesmoke;
+}
+li.tasksListHeader{
+    border:1px solid rgb(255, 255, 255);
+}
+
+.check{
+    justify-self: center;
+    width: 20%;
+}
+
+.addTask{
+    align-self: center;
+    border: none;
+    background-color: rgb(64, 254, 64);
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+}
+.addTask:hover{
+    background-color: rgb(112, 255, 112);
+}
+
+.addTaskForm{
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -68,22 +148,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: whitesmoke;
+    background: rgba(0, 0, 0, 0.211);
+    backdrop-filter: blur(5px);
 }
 
 .footer {
     
     text-decoration: none;
-    color: black;
     text-align: center;
     font-weight: 400;
 }
 .footer > p > a {
-    color: black;
+    color: whitesmoke;
+    padding: 2px;
+    margin: 2px;
 }
 .footer > p > a:hover {
-    color: black;
     padding: 2px;
-    border: 1px solid #333;
+    border: 1px solid #ffffff;
     border-radius: 5px;
 }
 

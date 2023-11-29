@@ -9,8 +9,8 @@ export default class Project{
         this.tasks = []
     }
 
-    addTask(title,discription,dueDate,priority){
-        const task = new Task(title,discription,dueDate,priority);
+    addTask(title,discription,dueDate,priority,completed){
+        const task = new Task(title,discription,dueDate,priority,completed);
         this.tasks.push(task);
     }
 
