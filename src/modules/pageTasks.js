@@ -45,6 +45,9 @@ function addTasks(){
     const priorityInput = document.createElement('input');
     priorityInput.type = 'number';
     priorityInput.placeholder = 'Priority';
+    priorityInput.setAttribute('min','1');
+    priorityInput.setAttribute('max','3');
+
     form.appendChild(priorityInput);
 
     // Add Btns Div
