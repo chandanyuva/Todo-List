@@ -1,7 +1,7 @@
 
 import heading from './pageHeading'
 import {projects,showProjectCreationForm} from './pageProjects'
-import {getTasks,addTasks} from './pageTasks'
+import {getTasks,addTasks,editTask} from './pageTasks'
 
 function renderLayout(){
     const content = document.querySelector("#content");
@@ -134,13 +134,13 @@ function renderTasks(){
 
 
     const currentProjectTasks = getTasks();
-    // console.log(currentProjectTasks);
-    // console.log(currentProjectTasks);
+
     currentProjectTasks.forEach((task)=>{
         const tItem = document.createElement('li');
 
         const tItemDiv = document.createElement('div');
         tItemDiv.classList.add('tasksItemDiv');
+        tItemDiv.classList.add(`${task.title}`);
 
         const tCompleted = document.createElement("INPUT");
         tCompleted.classList.add('check')
@@ -175,6 +175,12 @@ function renderTasks(){
         tItemDiv.appendChild(tPriority);
 
         tItem.appendChild(tItemDiv)
+
+        tItem.addEventListener('click',function (event){
+            // console.log(event);
+            tItem.removeEventListener('click',this);
+            editTask(task,task.title,task.discription,task.dueDate,task.priority,task.completed)
+        })
 
         tList.append(tItem);
     })
