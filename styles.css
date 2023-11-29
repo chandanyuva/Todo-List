@@ -66,8 +66,8 @@
     border-radius: 6px;
 }
 .addProject:hover{
-    background-color: rgb(112, 255, 112);
-    background: transparent;
+    /* background-color: ; */
+    background: rgba(112, 255, 112, 0.83);
     backdrop-filter: blur(50px);
 }
 
@@ -137,6 +137,30 @@ li.tasksListHeader{
 .addTaskForm{
     display: flex;
     flex-direction: column;
+    gap: 4px;
+}
+.addTaskForm > input, textarea{
+    padding: 4px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid rgb(35, 234, 25, 43);
+}
+
+.addTaskBtns{
+    display: flex;
+    justify-content: space-around;
+}
+.addTaskBtns > button{
+    border: none;
+    border-radius: 4px;
+    padding: 4px;
+    background-color: rgb(253, 253, 253);
+    
+    
+}
+.addTaskBtns > button:hover{
+    background: rgb(212, 212, 212);
 }
 
 
