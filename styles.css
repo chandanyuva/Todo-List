@@ -220,6 +220,13 @@ textarea {
 .editTaskBtns > button:hover {
     background: rgb(212, 212, 212);
 }
+button.deleteBtn{
+    background-color: rgb(255, 0, 0)
+}
+button.deleteBtn:hover{
+    background: rgb(209, 0, 0);
+}
+
 
 .footerDiv {
     grid-column: 1 / span 2;
