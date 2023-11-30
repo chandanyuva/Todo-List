@@ -1,3 +1,3 @@
-import pageLoad from './modules/pageLoad';
+import pageLoad from "./modules/pageLoad";
 
 pageLoad();

@@ -1,88 +1,89 @@
-
-import {projects,getActiveProject} from "./pageProjects";
+import { projects, getActiveProject } from "./pageProjects";
 import { renderTasks } from "./DomUtil";
 
-
-function getTasks(){
+function getTasks() {
     const currentProjectTasks = [];
 
-    projects.forEach((project)=>{
-        if (project.isActive){
+    projects.forEach((project) => {
+        if (project.isActive) {
             currentProjectTasks.push(...project.tasks);
         }
-    })
-    return currentProjectTasks
+    });
+    return currentProjectTasks;
 }
 
-
-
-function addTasks(){
+function addTasks() {
     // console.log(getActiveProject());
-    const addTask = document.querySelector('.addTask');
+    const addTask = document.querySelector(".addTask");
 
-    const form = document.createElement('form');
-    form.classList.add('addTaskForm')
+    const form = document.createElement("form");
+    form.classList.add("addTaskForm");
 
     // Add a title input field
-    const titleInput = document.createElement('input');
-    titleInput.type = 'text';
+    const titleInput = document.createElement("input");
+    titleInput.type = "text";
     // titleInput.setAttribute("required", "")
-    titleInput.placeholder = 'Task title';
+    titleInput.placeholder = "Task title";
     form.appendChild(titleInput);
 
     // Add a description textarea
-    const descriptionTextarea = document.createElement('textarea');
-    descriptionTextarea.placeholder = 'Task description';
+    const descriptionTextarea = document.createElement("textarea");
+    descriptionTextarea.placeholder = "Task description";
     form.appendChild(descriptionTextarea);
 
     // Add a due date input field
-    const dueDateInput = document.createElement('input');
-    dueDateInput.type = 'date';
-    dueDateInput.placeholder = 'Due date';
+    const dueDateInput = document.createElement("input");
+    dueDateInput.type = "date";
+    dueDateInput.placeholder = "Due date";
     form.appendChild(dueDateInput);
 
     // Add a priority input field
-    const priorityInput = document.createElement('input');
-    priorityInput.type = 'number';
-    priorityInput.placeholder = 'Priority';
-    priorityInput.setAttribute('min','1');
-    priorityInput.setAttribute('max','3');
+    const priorityInput = document.createElement("input");
+    priorityInput.type = "number";
+    priorityInput.placeholder = "Priority";
+    priorityInput.setAttribute("min", "1");
+    priorityInput.setAttribute("max", "3");
 
     form.appendChild(priorityInput);
 
     // Add Btns Div
 
-    const BtnsDiv = document.createElement('div');
-    BtnsDiv.classList.add('addTaskBtns');
+    const BtnsDiv = document.createElement("div");
+    BtnsDiv.classList.add("addTaskBtns");
     // Add a cancel button
-    const cancelButton = document.createElement('button');
-    cancelButton.type = 'button';
-    cancelButton.textContent = 'Cancel';
-    cancelButton.addEventListener('click', (event) => {
+    const cancelButton = document.createElement("button");
+    cancelButton.type = "button";
+    cancelButton.textContent = "Cancel";
+    cancelButton.addEventListener("click", (event) => {
         addTask.removeChild(form);
         addTask.disabled = false;
         // Reset the form
         form.reset();
-      });
+    });
     BtnsDiv.appendChild(cancelButton);
 
     // Add a submit button
-    const submitButton = document.createElement('button');
-    submitButton.type = 'submit';
-    submitButton.textContent = 'Submit';
+    const submitButton = document.createElement("button");
+    submitButton.type = "submit";
+    submitButton.textContent = "Submit";
     BtnsDiv.appendChild(submitButton);
 
     form.appendChild(BtnsDiv);
 
     // Add an event listener to the submit button
-    submitButton.addEventListener('click', (event) => {
+    submitButton.addEventListener("click", (event) => {
         event.preventDefault();
-        if (titleInput.value === ""){
+        if (titleInput.value === "") {
             alert("task titel cannot be empty");
-            return
+            return;
         }
         const activeProject = getActiveProject();
-        activeProject.addTask(titleInput.value,descriptionTextarea.value,dueDateInput.value,priorityInput.value);
+        activeProject.addTask(
+            titleInput.value,
+            descriptionTextarea.value,
+            dueDateInput.value,
+            priorityInput.value
+        );
         renderTasks();
 
         // Reset the form
@@ -90,119 +91,127 @@ function addTasks(){
         form.reset();
     });
 
-    
     addTask.disabled = true;
     addTask.appendChild(form);
 }
-function editTask(task,title,discription,dueDate,priority,completed){
+function editTask(title, discription, dueDate, priority, completed) {
     // console.log(getActiveProject());
-    const currentTask = document.querySelector(`.${title}`);
-    while (currentTask.firstChild){
+    const currentTask = document.querySelector(
+        `.${title.split(" ").join("_")}`
+    );
+
+    while (currentTask.firstChild) {
         currentTask.removeChild(currentTask.firstChild);
     }
-    console.log(currentTask);
+    // console.log(currentTask);
 
-    const form = document.createElement('form');
-    form.classList.add('editTaskForm')
+    const form = document.createElement("form");
+    form.classList.add("editTaskForm");
 
     // Add label to title
-    const titleLabel = document.createElement('label');
-    titleLabel.setAttribute('for','title');
-    titleLabel.innerText = 'Title: ';
+    const titleLabel = document.createElement("label");
+    titleLabel.setAttribute("for", "title");
+    titleLabel.innerText = "Title: ";
     form.appendChild(titleLabel);
     // Add a title input field
-    const titleInput = document.createElement('input');
-    titleInput.setAttribute('id','title');
-    titleInput.type = 'text';
+    const titleInput = document.createElement("input");
+    titleInput.setAttribute("id", "title");
+    titleInput.type = "text";
     titleInput.value = `${title}`;
     form.appendChild(titleInput);
 
     // Add label to description
-    const descriptionLabel = document.createElement('label');
-    descriptionLabel.setAttribute('for','description');
-    descriptionLabel.innerText = 'Description: ';
+    const descriptionLabel = document.createElement("label");
+    descriptionLabel.setAttribute("for", "description");
+    descriptionLabel.innerText = "Description: ";
     form.appendChild(descriptionLabel);
     // Add a description textarea
-    const descriptionTextarea = document.createElement('textarea');
-    descriptionTextarea.setAttribute('id','description')
+    const descriptionTextarea = document.createElement("textarea");
+    descriptionTextarea.setAttribute("id", "description");
     descriptionTextarea.value = `${discription}`;
     form.appendChild(descriptionTextarea);
 
-
     // Add label to dueDate
-    const dueDateLabel = document.createElement('label');
-    dueDateLabel.setAttribute('for','dueDate');
-    dueDateLabel.innerText = 'Due-Date: ';
+    const dueDateLabel = document.createElement("label");
+    dueDateLabel.setAttribute("for", "dueDate");
+    dueDateLabel.innerText = "Due-Date: ";
     form.appendChild(dueDateLabel);
     // Add a due date input field
-    const dueDateInput = document.createElement('input');
-    dueDateInput.type = 'date';
-    dueDateInput.setAttribute('id','dueDate')
+    const dueDateInput = document.createElement("input");
+    dueDateInput.type = "date";
+    dueDateInput.setAttribute("id", "dueDate");
     dueDateInput.value = `${dueDate}`;
     form.appendChild(dueDateInput);
 
     // Add label to dueDate
-    const priorityLabel = document.createElement('label');
-    priorityLabel.setAttribute('for','priority');
-    priorityLabel.innerText = 'Priority; ';
+    const priorityLabel = document.createElement("label");
+    priorityLabel.setAttribute("for", "priority");
+    priorityLabel.innerText = "Priority; ";
     form.appendChild(priorityLabel);
     // Add a priority input field
-    const priorityInput = document.createElement('input');
-    priorityInput.setAttribute('id','priority')
-    priorityInput.type = 'number';
+    const priorityInput = document.createElement("input");
+    priorityInput.setAttribute("id", "priority");
+    priorityInput.type = "number";
     priorityInput.value = `${priority}`;
-    priorityInput.setAttribute('min','1');
-    priorityInput.setAttribute('max','3');
+    priorityInput.setAttribute("min", "1");
+    priorityInput.setAttribute("max", "3");
 
     form.appendChild(priorityInput);
 
     // Add Btns Div
 
-    const BtnsDiv = document.createElement('div');
-    BtnsDiv.classList.add('editTaskBtns');
-    
+    const BtnsDiv = document.createElement("div");
+    BtnsDiv.classList.add("editTaskBtns");
+
     // Add a cancel button
-    const cancelButton = document.createElement('button');
-    cancelButton.type = 'button';
-    cancelButton.textContent = 'Cancel';
-    cancelButton.addEventListener('click', (event) => {
-        console.log(event);
+    const cancelButton = document.createElement("button");
+    cancelButton.type = "button";
+    cancelButton.textContent = "Cancel";
+    cancelButton.addEventListener("click", (event) => {
         currentTask.removeChild(form);
-        // Reset the form
-        form.reset();
-      });
+        renderTasks();
+    });
     BtnsDiv.appendChild(cancelButton);
 
     // Add a submit button
-    const submitButton = document.createElement('button');
-    submitButton.type = 'submit';
-    submitButton.textContent = 'Submit';
+    const submitButton = document.createElement("button");
+    submitButton.type = "submit";
+    submitButton.textContent = "Submit";
     BtnsDiv.appendChild(submitButton);
 
     form.appendChild(BtnsDiv);
 
     // Add an event listener to the submit button
-    submitButton.addEventListener('click', (event) => {
+    submitButton.addEventListener("click", (event) => {
         event.preventDefault();
-        if (titleInput.value === ""){
+        if (titleInput.value === "") {
             alert("task titel cannot be empty");
-            return
+            return;
         }
         const activeProject = getActiveProject();
-        activeProject.addTask(titleInput.value,descriptionTextarea.value,dueDateInput.value,priorityInput.value);
+        const index = activeProject.removeTask(title);
+        // console.log(index);
+        activeProject.addTask(
+            titleInput.value,
+            descriptionTextarea.value,
+            dueDateInput.value,
+            priorityInput.value,
+            completed,
+            index
+        );
         renderTasks();
 
         // Reset the form
-        currentTask.disabled = false;
-        form.reset();
+        // currentTask.disabled = false;
+        // form.reset();
     });
 
-    
     currentTask.appendChild(form);
 }
 
+function removeTask() {}
 
 // console.log(currentProjectTasks);
 console.log("tasks loaded");
 
-export {getTasks,addTasks,editTask};
+export { getTasks, addTasks, editTask };
