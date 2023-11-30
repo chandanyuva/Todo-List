@@ -19,15 +19,15 @@ function showProjectCreationForm() {
     renderProjects();
 }
 
-const p1 = new Project(1, "project1", true);
-const p2 = new Project(2, "project2");
+const p1 = new Project(1, "School", true);
+const p2 = new Project(2, "Project");
 
-p1.addTask("task1", "Task Discription", "2023-11-16", 2, true);
-p1.addTask("task2", "Task Discription", "2023-11-16", 1, false);
-p1.addTask("task3", "Task Discription", "2023-11-16", 1, false);
+p1.addTask("Quize", "need to prepare", "2023-11-16", 2, false);
+p1.addTask("Project Ideas", "Todo-List app", "2023-11-16", 1, true);
+p1.addTask("minor project", "Calculator using JS", "2023-11-16", 2, false);
 
-p2.addTask("task1", "Task Discription", "2023-11-16", 2, true);
-p2.addTask("task2", "Task Discription", "2023-11-16", 2, false);
+p2.addTask("Create a rough skitch", "Improve css", "2023-11-16", 2, true);
+p2.addTask("need to add local storage", "simpley add a localstorage variable to existing list", "2023-11-16", 2, false);
 
 projects.push(p1);
 projects.push(p2);

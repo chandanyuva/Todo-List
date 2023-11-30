@@ -173,6 +173,21 @@ function editTask(title, discription, dueDate, priority, completed) {
     });
     BtnsDiv.appendChild(cancelButton);
 
+    // Add a Delete button
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.textContent = "Delete"
+    deleteButton.classList.add("deleteBtn");
+    deleteButton.addEventListener('click',(event)=>{
+        currentTask.removeChild(form);
+        const activeProject = getActiveProject();
+        activeProject.removeTask(title);
+        renderTasks();
+
+    });
+    BtnsDiv.appendChild(deleteButton);
+
     // Add a submit button
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
